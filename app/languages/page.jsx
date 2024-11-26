@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { connectToDatabase } from "@/utils/connectMongo";
+import { connectToDatabase } from '../../utils/connectMongo'
 
 
 async function getData(perPage, page) {
