@@ -1,6 +1,14 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "./component/NavBar";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
+
 /*
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -20,12 +28,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <ClerkProvider> 
     <html lang="en">
-      <body
-      >
+      <body>
         <NavBar/>
+        <div className='mx-auto flex w-full mt-20 flex-col justify-center px-5 pt-0 md:h-[unset] md:max-w-[92%] lg:max-w-[80%] lg:px-6 xl:pl-0'> 
         {children}
+        </div>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
