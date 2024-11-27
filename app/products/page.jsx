@@ -1,10 +1,13 @@
 import Link from "next/link" 
- import Itemlist from '../component/Itemlist'
+import dynamic from 'next/dynamic'
+ /* import Itemlist from '../component/Itemlist' */
 
-
-
+ const DynamicNotFound = dynamic(
+	() => import('../component/Itemlist'),
+	{ ssr: false }
+);
  
-export default async  function Productspage() {
+export default async function Productspage() {
 
 
   return (
@@ -14,7 +17,8 @@ export default async  function Productspage() {
         <Link href ='/addTopic'>
         <button className="bg-white border-solid border-2 border-sky-500 p-3 my-5 rounded-xl ">Add topics</button>
         </Link>
-        <Itemlist/> 
+      {/*   <Itemlist/>  */}
+      <DynamicNotFound />
     </div>
   )
 }
