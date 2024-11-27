@@ -25,14 +25,15 @@ export default function Userdetails () {
   return (
 
     <div className="">
-      <UserProfile /> 
+      {/* <UserProfile />  */}
 
       { user.firstName || user.lastName ? (
         <>
           <h1 className="text-[1.0625rem] font-semibold relative w-full text-center">
               {user.firstName} {user.lastName}
            </h1> 
-           <p> {user.emailAddresses[0].emailAddress}</p>        
+           <p> {user.emailAddresses[0].emailAddress}</p>   
+           <p>{user.provider}</p>     
         </>
         ):null
       }  
@@ -62,7 +63,7 @@ export default function Userdetails () {
               {String(organization.pendingInvitationsCount)}   */
           
         ) : null}
-        <div>You are signed Out</div>
+        
         <SignOutButton>
          <button className='bg-black text-white text-xl py-3 px-5 rounded-xl'>My custom button</button>
         </SignOutButton>

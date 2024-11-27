@@ -22,7 +22,7 @@ const NavBar = () => {
   } */
 
     if(user){
-      console.log( JSON.stringify(user) )
+     // console.log("Navbar"+JSON.stringify(user) )
     }
    
   return (
@@ -50,9 +50,8 @@ const NavBar = () => {
              <div className="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4">
              <SignOutButton redirectUrl='/'>
              <button className='bg-black text-white py-2 px-5 rounded-xl'>SignOut</button>
-              </SignOutButton>
-
-                </div>
+              </SignOutButton> 
+              </div>
                  
             )
             :( // ไม่มี false
