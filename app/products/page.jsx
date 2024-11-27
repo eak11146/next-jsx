@@ -1,7 +1,7 @@
 import Link from "next/link" 
  import Itemlist from '../component/Itemlist'
 
-export default function Productpage() {
+export default function Productspage() {
 
 
   return (

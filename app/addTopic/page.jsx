@@ -27,7 +27,7 @@ export default function AddTopic() {
       });
 
       if (res.ok) {
-        router.push("/product");
+        router.push("/products");
       } else {
         throw new Error("Failed to create a topic");
       }
