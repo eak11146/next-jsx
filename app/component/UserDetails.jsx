@@ -27,46 +27,55 @@ export default function Userdetails () {
     <div className="">
       {/* <UserProfile />  */}
 
-      { user.firstName || user.lastName ? (
+      { user.fullName ? (
         <>
-          <h1 className="text-[1.0625rem] font-semibold relative w-full text-center">
-              {user.firstName} {user.lastName}
-           </h1> 
-           <p> {user.emailAddresses[0].emailAddress}</p>   
-           <p>{user.provider}</p>     
+      
+          <div className="grid grid-rows-3 grid-flow-col gap-4 font-mono text-white text-sm text-center font-bold leading-6 bg-stripes-fuchsia rounded-lg">
+
+  <div className="p-4 rounded shadow-lg bg-fuchsia-200 grid place-content-center row-span-3"> 
+  <img src={user.imageUrl} className="size-20 rounded-full" />
+  </div>
+
+  <div className="p-4 rounded bg-fuchsia-500 grid place-content-center col-span-2 dark:bg-fuchsia-800 dark:text-fuchsia-400">
+  <h1 className="text-[1.0625rem] font-semibold relative w-full text-center">
+  {user.firstName} {user.lastName}
+    </h1>  
+    <p>{user.emailAddresses[0].emailAddress}</p>   
+  </div>
+
+  <div className="p-4 rounded shadow-lg bg-fuchsia-500 grid place-content-center row-span-2 col-span-2"> 
+           <p>Create At</p>
+           <p>{ formatDate(user.createdAt) }</p> 
+           <p>Last login</p>
+           <p>{ formatDate(user.lastSignInAt) }</p>   
+  </div>
+</div>
+  
         </>
         ):null
       }  
 
  
  
-<img src={user.imageUrl} className="size-20 rounded-full" />
+ 
 
 
       {organization ? (
           <>
             <div className="mt-6 mb-4 text-[0.9375rem] font-semibold">
-              Organization detail
-              
-              
+              Organization detail 
             </div>
-            <p>{ formatDate(user.lastSignInAt) }</p>
-          </>
-             
-          
-            
-              
-            
-           /*    {organization.id} 
+            {organization.id} 
               {organization.name} 
               {String(organization.membersCount)}
-              {String(organization.pendingInvitationsCount)}   */
-          
+              {String(organization.pendingInvitationsCount)}
+            
+          </> 
         ) : null}
         
-        <SignOutButton>
+        {/* <SignOutButton>
          <button className='bg-black text-white text-xl py-3 px-5 rounded-xl'>My custom button</button>
-        </SignOutButton>
+        </SignOutButton> */}
        
     </div>
     
