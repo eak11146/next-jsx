@@ -1,7 +1,10 @@
 import Link from "next/link" 
  import Itemlist from '../component/Itemlist'
 
-export default function Productspage() {
+
+
+ 
+export default async  function Productspage() {
 
 
   return (
