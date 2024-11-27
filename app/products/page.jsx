@@ -1,31 +1,50 @@
 import Link from "next/link" 
+import { connectToDatabase } from '../../utils/connectMongo'
 import Removebtn from '../component/Removebtn'
 import { HiPencilAlt } from 'react-icons/hi';
   
-
-
- const getTopics = async () => {
+async function getData() {
   try {
-   const res = await fetch("http://localhost:3000/api/topics", {
-     cache: "no-store",
-   });
+    // DB Connect
+    const client = await connectToDatabase();
+    const db = client.db("program");
 
-   if (!res.ok) {
-     throw new Error("Failed to fetch topics");
-   }
+    // DB Query
+    const items = await db
+      .collection("topics")
+      .find({})      
+      .toArray();
+ 
 
-   return res.json();
- } catch (error) {
-   console.log("Error loading topics: ", error);
- }
-};
+    const respnse = { items };
+    console.log(respnse);
+    return respnse;
 
+  } catch (error) {
+    throw new Error("Failed to fetch data. Please try again later.");
+  }
+} 
 
+const ListItem = ({ title, description ,id }) => (
+  <div>
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <div className="flex gap-2">
+           {/*  <Removebtn id={item._id} />
+ 
+            <Link href={`/editTopic/${item._id}`}>
+             <HiPencilAlt size={24} /> Edit
+            </Link> */}
+     </div>
+  </div>
+);
 
 export default async function Productspage() {
 
-  const { topics } = await getTopics();
+  const data =  await getData();
   
+  console.log(data)
+
   return (
     <div className="grid justify-items-center">
          
@@ -35,26 +54,32 @@ export default async function Productspage() {
         </Link>
         <h1 className='font-bold text-2xl'>List Post</h1>
         {
-        topics.map((t) => (
-        <div
-          key={t._id}
+         /*data.items.map((item) => ( 
+          <div
+          key={ item._id}
           className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start w-[60%] "
         >
           <div>
-            <h2 className="font-bold text-xl">{t.title}</h2>
-            <div>{t.description}</div>
+            <h2 className="font-bold text-xl">{item.title}</h2>
+            <div>{item.description}</div>
           </div>
 
           <div className="flex gap-2">
-            <Removebtn id={t._id} />
+            <Removebtn id={item._id} />
  
-            <Link href={`/editTopic/${t._id}`}>
+            <Link href={`/editTopic/${item._id}`}>
              <HiPencilAlt size={24} /> Edit
             </Link>
           </div>
+
         </div>
-      ))
-      }
+         ))*/
+        data.items.map((item) => (
+          // Use the spread operator to pass all properties of 'item' as props
+          <ListItem key={item.id} {...item} />
+        ))
+        }
+      
        
     </div>
   )
