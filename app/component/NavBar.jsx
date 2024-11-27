@@ -1,17 +1,30 @@
  'use client'
  
 import Link from "next/link"
-import { useUser, UserButton ,SignOutButton } from "@clerk/nextjs";
+import { useUser, UserButton ,SignOutButton  } from "@clerk/nextjs";
 
 const NavBar = () => {
 
-  const user = useUser();
+   const { user } = useUser(); 
+   /* const { session } = useSession();
+    const { organization } = useOrganization(); */
 
-  if(user){
-    console.log( user);
+
+  
+/* 
+  if (!isLoaded) {
+    // Add logic to handle loading state
+    return null
   }
+  if (!isSignedIn) {
+    // Add logic to handle not signed in state
+    return null
+  } */
 
-
+    if(user){
+      console.log( JSON.stringify(user) )
+    }
+   
   return (
     <>
     <nav id="header" className="w-full z-30 top-5 py-1 bg-white shadow-md border-b border-blue-400 mt-2">
@@ -33,17 +46,31 @@ const NavBar = () => {
                </ul>
             </nav>
          </div>
+         { user ? ( // ture
+             <div className="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4">
+             <SignOutButton redirectUrl='/'>
+             <button className='bg-black text-white py-2 px-5 rounded-xl'>SignOut</button>
+              </SignOutButton>
+
+                </div>
+                 
+            )
+            :( // ไม่มี false
+               <div className="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4" id="nav-content">
+               <div className="auth flex items-center w-full md:w-full">
+                 <Link href='/sign-in' > 
+                  <button className="bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700">Sign in</button>
+                  </Link>
+                  <Link href='/sign-up' > 
+                  <button className="bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-gray-100">Sign up</button>
+                  </Link>
+               </div>
+               </div> 
+               
+            )
+         }
          
-         <div className="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4" id="nav-content">
-            <div className="auth flex items-center w-full md:w-full">
-              <Link href='/sign-in' > 
-               <button className="bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700">Sign in</button>
-               </Link>
-               <Link href='/sign-up' > 
-               <button className="bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-gray-100">Sign up</button>
-               </Link>
-            </div>
-         </div>
+          
       </div>
    </nav>
 
