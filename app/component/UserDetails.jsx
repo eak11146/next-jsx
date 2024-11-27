@@ -20,7 +20,7 @@ export default function Userdetails () {
 
   if (!user || !session) return null;
 
-  console.log(user)
+ // console.log(user)
 
   return (
 
@@ -41,6 +41,7 @@ export default function Userdetails () {
   {user.firstName} {user.lastName}
     </h1>  
     <p>{user.emailAddresses[0].emailAddress}</p>   
+    <p>{user.externalAccounts[0].provider}</p>  
   </div>
 
   <div className="p-4 rounded shadow-lg bg-fuchsia-500 grid place-content-center row-span-2 col-span-2"> 
